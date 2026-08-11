@@ -77,7 +77,7 @@ An OKR, at its simplest, is a structured way of answering two questions: ‘What
 
 Applied to social sector work, this reframe is powerful. Instead of a program objective that reads ‘deliver financial literacy training to 800 women,’ an OKR-style framing asks: what would actually be different in those women’s financial lives if the training worked? If the answer is ‘they would be saving consistently, reducing high-interest debt, and making more financial decisions independently,’ then those become the Key Results — and measuring them, however imperfectly, is what the program is actually for.
 
-| What most non-profits currently track | What****<u>outcome-focused</u>****measurement tracks instead |
+| What most non-profits currently track | What outcome-focused measurement tracks instead |
 | ------------ | ------------ |
 
 | Number of participants enrolled |
