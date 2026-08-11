@@ -83,10 +83,7 @@ Applied to social sector work, this reframe is powerful. Instead of a program ob
 | Number of workshops delivered | Whether program content matches the specific barriers participants face in their context |
 | Attendance and completion rates | Whether completers are applying skills — and who is not completing, and why |
 | Funds disbursed or loans made | Whether recipients have more financial control and decision-making power than before |
-
-Testimonials and case stories
-
-Patterns across participants that reveal what is working, for whom, and under what conditions
+| Testimonials and case stories | Patterns across participants that reveal what is working, for whom, and under what conditions |
 
 *The shift is not about discarding what you currently measure*. Attendance rates still matter. Participant numbers still matter for planning and resource allocation. The shift is about adding a second tier of questions — ones that connect the activity to the change — and making that tier the one that drives program decisions, not just the one that appears in the appendix of a donor report.
 
