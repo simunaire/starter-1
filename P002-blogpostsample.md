@@ -79,22 +79,10 @@ Applied to social sector work, this reframe is powerful. Instead of a program ob
 
 | What most non-profits currently track | What outcome-focused measurement tracks instead |
 | ------------ | ------------ |
-
-| Number of participants enrolled |
-
-Proportion of participants who demonstrate changed behaviour 3–6 months post-program |
-
-| Number of workshops delivered |
-
-Whether program content matches the specific barriers participants face in their context |
-
-Attendance and completion rates
-
-Whether completers are applying skills — and who is not completing, and why
-
-Funds disbursed or loans made
-
-Whether recipients have more financial control and decision-making power than before
+| Number of participants enrolled | Proportion of participants who demonstrate changed behaviour 3–6 months post-program |
+| Number of workshops delivered | Whether program content matches the specific barriers participants face in their context |
+| Attendance and completion rates | Whether completers are applying skills — and who is not completing, and why |
+| Funds disbursed or loans made | Whether recipients have more financial control and decision-making power than before |
 
 Testimonials and case stories
 
