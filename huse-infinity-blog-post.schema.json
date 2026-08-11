@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://huseinfinity.com/schemas/blog-post.schema.json",
+  "title": "HuseInfinityBlogPost",
+  "description": "Baseline content model for a 'Thoughts' post, used both to structure historical-post extraction and as the shape blog content will take in the new Next.js site (MDX frontmatter or CMS entry).",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "slug",
+    "legacyUrl",
+    "publishDate",
+    "author",
+    "categories",
+    "excerpt",
+    "body",
+    "seo",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable internal identifier, independent of slug (slug may change; id should not). e.g. 'P001'.",
+      "pattern": "^P[0-9]{3,}$"
+    },
+    "title": {
+      "type": "string",
+      "description": "Full post title as published.",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "slug": {
+      "type": "string",
+      "description": "New URL slug on the rebuilt site, e.g. 'free-before-paid-technology-investment'.",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "legacyUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Original Wix URL, kept permanently for redirect mapping and audit trail."
+    },
+    "publishDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Original publish date (ISO 8601), preserved from Wix — do not reset on migration."
+    },
+    "updatedDate": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date of last substantive content edit, if any. Null if never updated post-migration."
+    },
+    "author": {
+      "type": "object",
+      "description": "Reused across posts as a shared author object, not duplicated per post — supports author credibility/E-E-A-T pages.",
+      "required": ["name", "slug"],
+      "properties": {
+        "name": { "type": "string" },
+        "slug": { "type": "string", "description": "Links to author bio page, e.g. 'nelly-shen'." },
+        "bio": { "type": "string" },
+        "avatarUrl": { "type": "string", "format": "uri" }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "description": "One or more categories from the proposed taxonomy (see Category Taxonomy tab). Kept as an array since Wix allowed multi-category tagging in practice.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Technology & Digital Strategy",
+          "Financial Empowerment",
+          "Education",
+          "Consulting",
+          "Investment",
+          "People",
+          "Capacity Building"
+        ]
+      },
+      "minItems": 1
+    },
+    "tags": {
+      "type": "array",
+      "description": "Free-form keyword tags, distinct from categories, for finer-grained internal linking and search.",
+      "items": { "type": "string" }
+    },
+    "contentPillar": {
+      "type": "string",
+      "description": "Editorial/strategic pillar this post supports — used to track progress toward the thought-leadership goal, not shown publicly. Extend this enum as the content strategy develops.",
+      "enum": [
+        "Non-profit technology strategy",
+        "Impact measurement & evaluation",
+        "Governance & capability building",
+        "Gender & inclusion",
+        "Future of work in Asia",
+        "Corporate-nonprofit partnership models"
+      ]
+    },
+    "povStrength": {
+      "type": "integer",
+      "description": "Internal editorial rating (1-5) of how strongly the post stakes out an original point of view vs. general summary — used to prioritize rewrites for posts aiming at opinion-leader positioning.",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "excerpt": {
+      "type": "string",
+      "description": "Short teaser/dek shown on index pages, distinct from meta description.",
+      "maxLength": 400
+    },
+    "featuredImage": {
+      "type": "object",
+      "required": ["src", "alt"],
+      "properties": {
+        "src": { "type": "string", "format": "uri" },
+        "alt": {
+          "type": "string",
+          "description": "Descriptive alt text — many legacy Wix images lack this; write on extraction."
+        },
+        "caption": { "type": "string" },
+        "credit": { "type": "string" }
+      }
+    },
+    "body": {
+      "type": "string",
+      "description": "Full post content in Markdown/MDX. Preserve original paragraph structure and any embedded links during extraction."
+    },
+    "readingTimeMinutes": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "wordCount": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "internalLinks": {
+      "type": "array",
+      "description": "Other posts/pages this post links to — used to preserve and later strengthen internal linking structure.",
+      "items": { "type": "string", "format": "uri" }
+    },
+    "callToAction": {
+      "type": "object",
+      "description": "Optional CTA block, e.g. linking to a downloadable resource or the newsletter.",
+      "properties": {
+        "text": { "type": "string" },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "seo": {
+      "type": "object",
+      "required": ["metaTitle", "metaDescription"],
+      "properties": {
+        "metaTitle": { "type": "string", "maxLength": 60 },
+        "metaDescription": { "type": "string", "maxLength": 160 },
+        "canonicalUrl": { "type": "string", "format": "uri" },
+        "noindex": {
+          "type": "boolean",
+          "default": false,
+          "description": "Legacy site has at least one page incorrectly set to noindex — carry this flag explicitly so it's a deliberate decision, not an accident, on the new site."
+        },
+        "ogImage": { "type": "string", "format": "uri" }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "published", "archived"],
+      "description": "Publication status on the new site."
+    },
+    "migration": {
+      "type": "object",
+      "description": "Tracking metadata for the migration project itself — not part of the public content model, strip before final CMS import if desired.",
+      "properties": {
+        "extractionStatus": {
+          "type": "string",
+          "enum": ["Not Started", "In Progress", "Extracted", "Reviewed", "Migrated"]
+        },
+        "redirectFrom": {
+          "type": "string",
+          "format": "uri",
+          "description": "Duplicate of legacyUrl for convenience in redirect-generation scripts."
+        },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}
